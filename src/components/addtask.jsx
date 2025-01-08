@@ -70,32 +70,32 @@ const AddTask = ({ addTaskHandler }) => {
                 <button
                     className="standardbutton addtaskbutton"
                     onClick={async () => {
-                        const token = window.localStorage.getItem("token")
+                        const authority = window.localStorage.getItem("authority")
 
-                        if (!token) {
+                        if (!authority) {
                             throw new Error("Not logged in")
                         }
 
-                        const response = await fetch("https://localhost:7094/api/task", {
+                        const response = await fetch("/api/task", {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/json",
-                                Authorization: `Bearer ${token}`,
+                                Authority: authority,
                             },
                             body: JSON.stringify({
                                 title: title,
                                 description: description,
-                                assignDate: assignDate ? assignDate : Date(),
+                                assignDate: assignDate ? assignDate : new Date().toISOString().slice(0, 10),
                                 recurringMonth: recurringMonth,
                                 recurringN: recurringN,
-                                recurringStop: recurringStop ? recurringStop : Date(),
+                                recurringStop: recurringStop ? recurringStop : new Date().toISOString().slice(0, 10),
                             }),
                         })
 
                         if (response.ok) {
                             addTaskHandler(true)
                         } else {
-                            console.log(response)
+                            console.log(await response.json())
                             addTaskHandler(false)
                         }
                     }}

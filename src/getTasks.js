@@ -1,21 +1,21 @@
 import { Task } from "./components/taskstructure.js"
 
 function getTasks(setTasks) {
-    const token = window.localStorage.getItem("token")
+    const authority = window.localStorage.getItem("authority")
 
-    if (!token) {
+    if (!authority) {
         throw new Error("Not logged in")
     }
 
-    fetch("https://localhost:7094/api/task", {
+    fetch("/api/task", {
         method: "GET",
         headers: {
-            Authorization: `Bearer ${token}`,
+            Authority: authority,
         },
     })
         .then((r) => r.json())
         .then((json) => {
-            const tasks = json["$values"].map((v) => new Task(v))
+            const tasks = json.map((v) => new Task(v))
             console.log("tasks", tasks)
             setTasks(tasks)
         })

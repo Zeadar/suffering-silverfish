@@ -13,7 +13,7 @@ const LoginForm = ({ handleNewUsername }) => {
         }
 
         try {
-            const response = await fetch("https://localhost:7094/api/user/login", {
+            const response = await fetch("/api/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -24,7 +24,7 @@ const LoginForm = ({ handleNewUsername }) => {
             if (response.ok) {
                 const data = await response.json()
                 console.log("Success:", data)
-                window.localStorage.setItem("token", data.token)
+                window.localStorage.setItem("authority", data.authority)
                 handleNewUsername(data.username)
             } else {
                 console.error("Login failed:", response.statusText)

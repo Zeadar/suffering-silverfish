@@ -13,7 +13,7 @@ const RegisterForm = ({ successHandler }) => {
         }
 
         try {
-            const response = await fetch("https://localhost:7094/api/user/register", {
+            const response = await fetch("/api/user", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

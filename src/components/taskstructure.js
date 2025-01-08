@@ -1,6 +1,6 @@
 class Task {
     constructor({
-        id = 0,
+        id = "",
         assignDate = "",
         description = "",
         recurringMonth = false,

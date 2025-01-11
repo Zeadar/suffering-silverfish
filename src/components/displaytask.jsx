@@ -36,17 +36,20 @@ const DisplayTask = ({ task, even, handleDeleteTask }) => {
                 <button
                     className="standardbutton"
                     onClick={() => {
-                        const token = window.localStorage.getItem("token")
+                        const authority = window.localStorage.getItem("authority")
 
-                        if (!token) {
+                        if (!authority) {
                             throw new Error("Not logged in")
                         }
 
-                        fetch("https://localhost:7094/api/task/" + id, {
+                        fetch("/api/task", {
                             method: "DELETE",
                             headers: {
-                                Authorization: `Bearer ${token}`,
+                                Authority: authority,
                             },
+                            body: JSON.stringify({
+                                id: id,
+                            }),
                         })
                             .then(() => {
                                 console.log("removed", id)

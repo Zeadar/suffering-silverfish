@@ -13,8 +13,6 @@ function Title(titles) {
 }
 
 const Calendar = ({ tasks }) => {
-    // const today = new Date(2024, 8, 1)
-    console.log("tasks", tasks)
     const today = new Date()
     const daysThisMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate()
     let firstWeekday = new Date(today.getFullYear(), today.getMonth(), 1).getDay()
@@ -23,7 +21,7 @@ const Calendar = ({ tasks }) => {
     }
     const taskMap = new Map()
     tasks.forEach((t) => {
-        const due = t.due.date
+        const due = t.due
         const sDue = `${due.getFullYear()}${due.getMonth()}${due.getDate()}`
         taskMap.set(sDue, taskMap.get(sDue) ? taskMap.get(sDue).concat([t.title]) : [t.title])
     })

@@ -10,10 +10,14 @@ import Calendar from "./components/calendar.jsx"
 import { useState, useEffect } from "react"
 import { getTasks } from "./getTasks.js"
 
+function Empty() {
+    return <div></div>
+}
+
 function App() {
     const [username, setUsername] = useState(window.localStorage.getItem("username") ?? "")
     const [tasks, setTasks] = useState([])
-    const [nowDisplay, setNowDisplay] = useState(window.localStorage.getItem("token") ? "tasks" : "login")
+    const [nowDisplay, setNowDisplay] = useState("empty")
 
     const registerForm = RegisterForm({ successHandler: registerSuccessHandler })
     const loginForm = LoginForm({ handleNewUsername: handleNewUsername })
@@ -58,13 +62,13 @@ function App() {
     }
 
     function logoutHandler() {
-        window.localStorage.setItem("token", "")
+        window.localStorage.setItem("authority", "")
         setNowDisplay("login")
         setUsername("")
     }
 
     function registerHandler() {
-        window.localStorage.setItem("token", "")
+        window.localStorage.setItem("authority", "")
         setNowDisplay("register")
     }
 
@@ -79,16 +83,10 @@ function App() {
         setNowDisplay("addtask")
     }
 
-    useEffect(() => {
-        try {
-            getTasks(setTasks)
-        } catch (err) {
-            console.log(err)
-        }
-    }, []) // Empty dependency array means it only runs on mount
-
     function displayer() {
         switch (nowDisplay) {
+            case "empty":
+                return Empty()
             case "login":
                 return loginForm
             case "tasks":
@@ -103,6 +101,36 @@ function App() {
                 return <div>Herp derp</div>
         }
     }
+
+    useEffect(() => {
+        const authority = window.localStorage.getItem("authority")
+
+        if (!authority) {
+            setNowDisplay("login")
+            return
+        }
+
+        const headers = new Headers()
+        headers.append("Authority", authority)
+
+        fetch("/api/user", {
+            method: "GET",
+            headers: headers,
+        }).then((r) => {
+            if (r.ok) {
+                setNowDisplay("tasks")
+                try {
+                    getTasks(setTasks)
+                } catch (err) {
+                    console.log(err)
+                }
+            } else {
+                window.localStorage.setItem("authority", "")
+                window.localStorage.setItem("username", "")
+                setNowDisplay("login")
+            }
+        })
+    }, []) // Empty dependency array means it only runs on mount
 
     return (
         <div className="everything">

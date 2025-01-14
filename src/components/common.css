@@ -9,6 +9,7 @@
   border-radius: 4px;
   border-color: yellowgreen;
   color: whitesmoke;
+  height: 2rem;
 }
 
 .standardbutton:disabled {

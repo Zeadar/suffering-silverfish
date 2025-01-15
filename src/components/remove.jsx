@@ -29,12 +29,12 @@ const Remove = ({ removeHandler, username }) => {
                     className="standardbutton"
                     onClick={async () => {
                         try {
-                            const token = window.localStorage.getItem("token")
+                            const authority = window.localStorage.getItem("authority")
 
-                            const response = await fetch("https://localhost:7094/api/user/delete", {
+                            const response = await fetch("/api/user", {
                                 method: "DELETE",
                                 headers: {
-                                    Authorization: `Bearer ${token}`,
+                                    Authority: authority
                                 },
                             })
 

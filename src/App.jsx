@@ -15,18 +15,25 @@ function Empty() {
 }
 
 function App() {
-    const [username, setUsername] = useState(window.localStorage.getItem("username") ?? "")
+    const [username, setUsername] = useState(
+        window.localStorage.getItem("username") ?? "",
+    )
     const [tasks, setTasks] = useState([])
     const [nowDisplay, setNowDisplay] = useState("empty")
 
-    const registerForm = RegisterForm({ successHandler: registerSuccessHandler })
+    const registerForm = RegisterForm({
+        successHandler: registerSuccessHandler,
+    })
     const loginForm = LoginForm({ handleNewUsername: handleNewUsername })
     const taskList = TaskList({
         tasks: tasks,
         handleNewTask: handleNewTask,
         handleDeleteTask: removeTaskSuccessHandler,
     })
-    const removeForm = Remove({ removeHandler: removeUserSuccessHandler, username: username })
+    const removeForm = Remove({
+        removeHandler: removeUserSuccessHandler,
+        username: username,
+    })
     const addTask = AddTask({ addTaskHandler: addTaskSuccessHandler })
 
     function removeTaskSuccessHandler() {
@@ -144,11 +151,7 @@ function App() {
                 <div className="container">
                     <div className="frame">
                         <div className="flexy">{displayer()}</div>
-                    </div>
-                </div>
-                <div className="topper"></div>
-                <div className="container">
-                    <div className="frame">
+                        <div className="topper"/>
                         <Calendar tasks={tasks} />
                     </div>
                 </div>

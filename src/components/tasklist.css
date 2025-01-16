@@ -1,42 +1,38 @@
 .tasklist {
-  width: 100%;
-  border-radius: 2rem;
-  color: greenyellow;
+    width: 100%;
+    border-radius: 2rem;
+    color: greenyellow;
 }
 
 .title {
-  font-size: 2rem;
-  color: whitesmoke;
+    font-size: 2rem;
+    color: whitesmoke;
 }
 
 .addtask {
-  width: 3rem;
-  height: 3rem;
+    width: 3rem;
+    height: 3rem;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-  margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
 
-  background-color: transparent;
-  border: solid;
-  border-radius: 50%;
-  border-color: yellowgreen;
-  box-shadow: none;
-  outline: none;
+    background-color: transparent;
+    border: solid;
+    border-radius: 50%;
+    border-color: whitesmoke;
+    box-shadow: none;
+    outline: none;
 }
 
-.horizontalline {
-  position: absolute;
-  width: 2rem;
-  height: 0.2rem;
-  background: whitesmoke;
-}
-
-.verticalline {
-  position: absolute;
-  width: 0.2rem;
-  height: 2rem;
-  background: whitesmoke;
+.plus {
+    --b: 0.4rem; /* the thickness*/
+    --c: #0000 90deg, yellowgreen 0; /* the coloration */
+    width: 2rem; /* the size */
+    aspect-ratio: 1;
+    background: conic-gradient(from 90deg at var(--b) var(--b), var(--c))
+        calc(100% + var(--b) / 2) calc(100% + var(--b) / 2) /
+        calc(50% + var(--b)) calc(50% + var(--b));
 }

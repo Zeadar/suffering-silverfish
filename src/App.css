@@ -1,32 +1,37 @@
 .everything {
-  width: 100vw;
-  height: 100vh;
-  /* background: rgb(180,144,42); */
-  background: linear-gradient(
-    7deg,
-    rgba(180, 144, 42, 1) 0%,
-    rgba(188, 201, 73, 1) 33%,
-    rgba(54, 212, 29, 1) 67%,
-    rgba(111, 191, 188, 1) 100%
-  );
+    width: 100vw;
+    height: 100vh;
+    /* background: rgb(180,144,42); */
+    background: linear-gradient(
+        7deg,
+        rgba(180, 144, 42, 1) 0%,
+        rgba(188, 201, 73, 1) 33%,
+        rgba(54, 212, 29, 1) 67%,
+        rgba(111, 191, 188, 1) 100%
+    );
 }
 
 .genericbutton {
-  border-color: yellowgreen;
+    border-color: yellowgreen;
 }
 
 .container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .frame {
-  min-width: 40rem;
-  max-width: 60rem;
-  min-height: 20rem;
-  border-radius: 2rem;
-  padding: 2rem;
-  background: rgba(0, 10, 5, 0.75);
-  color: greenyellow;
+    min-width: 40rem;
+    max-width: 60rem;
+    /* min-height: 20rem; */
+    height: 80vh;
+    border-radius: 2rem;
+    padding: 2rem;
+    background: rgba(0, 10, 5, 0.75);
+    color: greenyellow;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }

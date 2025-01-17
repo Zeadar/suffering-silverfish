@@ -7,17 +7,16 @@ function getTasks(setTasks) {
         throw new Error("Not logged in")
     }
 
+    const headers = new Headers()
+    headers.append("Authority", authority)
+
     fetch("/api/task", {
-        method: "GET",
-        headers: {
-            Authority: authority,
-        },
+        headers,
     })
         .then((r) => r.json())
         .then((json) => {
-            const tasks = json.map((v) => new Task(v))
-            console.log("tasks", tasks)
-            setTasks(tasks)
+            console.log(json)
+            setTasks(json.map((v) => new Task(...Object.values(v))))
         })
         .catch((err) => {
             console.error(err)

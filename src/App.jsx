@@ -28,7 +28,7 @@ function App() {
     const taskList = TaskList({
         tasks: tasks,
         handleNewTask: handleNewTask,
-        handleDeleteTask: removeTaskSuccessHandler,
+        handleDeleteTask: tasksUpdateHandler,
     })
     const removeForm = Remove({
         removeHandler: removeUserSuccessHandler,
@@ -36,7 +36,7 @@ function App() {
     })
     const addTask = AddTask({ addTaskHandler: addTaskSuccessHandler })
 
-    function removeTaskSuccessHandler() {
+    function tasksUpdateHandler() {
         getTasks(setTasks)
     }
 

@@ -43,12 +43,7 @@ ul {
 }
 
 .today {
-    background: linear-gradient(
-        45deg,
-        rgba(0, 0, 0, 0) 0%,
-        rgba(00, 00, 000, 0) 80%,
-        yellowgreen 100%
-    );
+    background: radial-gradient(transparent 80%, yellowgreen 100%);
 }
 
 .unavailable {

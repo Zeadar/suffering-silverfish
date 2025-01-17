@@ -1,5 +1,5 @@
 class Task {
-    constructor({
+    constructor(
         id = "",
         assignDate = "",
         description = "",
@@ -7,7 +7,8 @@ class Task {
         recurringN = 0,
         recurringStop = "",
         title = "",
-    }) {
+        completeTasks = [],
+    ) {
         this.id = id
         this.assignDate = new Date(assignDate)
         this.description = description
@@ -15,8 +16,7 @@ class Task {
         this.reccuringN = recurringN
         this.recurringStop = new Date(recurringStop)
         this.title = title
-        // this.skipTasks = []
-        // this.completeTasks = []
+        this.completeTasks = completeTasks
 
         this.assignDate.setHours(0)
         this.assignDate.setMinutes(0)

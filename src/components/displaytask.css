@@ -1,37 +1,70 @@
 .taskrow {
-  font-size: 1.3rem;
-  /* display: flex; */
-  /* justify-content: space-between; */
-  width: 100%;
-  padding: 1rem;
-  border-radius: 1rem;
-  margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+    width: 100%;
+    max-width: 58rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .taskflexy {
-  width: 100%;
-  font-size: 1.3rem;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
+    width: 100%;
+    font-size: 1.3rem;
+    display: flex;
+}
+
+.group {
+    display: flex;
+    flex-direction: column;
+}
+
+.leftgroup {
+    width: 80%;
+}
+
+.lefttitle {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.rightgroup {
+    min-width: 20%;
+    display: flex;
+}
+
+.rightbuttons {
+    justify-content: space-between;
+}
+
+.righttext {
+    display: block;
+    text-align: justify;
+    width: 11rem;
+}
+
+.righttext::after {
+    content: "";
+    display: inline-block;
+    width: 100%;
 }
 
 .normaldue {
-  color: lightgoldenrodyellow;
+    color: lightgoldenrodyellow;
 }
 
 .overdue {
-  color: #ff2f51;
+    color: #ff2f51;
 }
 
 .underdue {
-  color: #2ffffd;
+    color: #2ffffd;
 }
 
 .odd {
-  background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .even {
-  background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.15);
 }

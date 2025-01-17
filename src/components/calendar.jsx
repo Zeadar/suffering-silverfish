@@ -13,6 +13,7 @@ function Title(titles) {
 }
 
 const Calendar = ({ tasks }) => {
+    console.log({ tasks })
     const today = new Date()
     const daysThisMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate()
     let firstWeekday = new Date(today.getFullYear(), today.getMonth(), 1).getDay()

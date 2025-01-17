@@ -2,11 +2,11 @@ class Task {
     constructor(
         id = "",
         assignDate = "",
+        title = "",
         description = "",
         recurringMonth = false,
         recurringN = 0,
         recurringStop = "",
-        title = "",
         completeTasks = [],
     ) {
         this.id = id

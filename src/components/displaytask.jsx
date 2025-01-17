@@ -74,22 +74,21 @@ const DisplayTask = ({ task, even, handleTaskUpdate }) => {
     return (
         <div className={"taskrow " + colorClass}>
             <div className="taskflexy">
-                <span className="normaldue">{title}</span>
-                <span className={dueClass}>{dueDisplay}</span>
-            </div>
-            <div className="taskflexy">
-                <span className="normalue">{description}</span>
-                <div>
-                    <button className="standardbutton">edit</button>
-                    <button
-                        className="standardbutton"
-                        style={{ marginLeft: "1rem" }}
-                        onClick={markComplete}
-                    >
-                        Mark Complete
-                    </button>
+                <div className="group leftgroup">
+                    <span className={`${dueClass} lefttitle`}>{title}</span>
+                    <span className=""> {description}</span>
+                </div>
+                <div className="group rightgroup">
+                    <span className={`${dueClass} rightgroup righttext`}>{dueDisplay}</span>
+                    <div className="rightgroup rightbuttons">
+                        <button className="standardbutton">edit</button>
+                        <button className="standardbutton" onClick={markComplete}>
+                            Mark Complete
+                        </button>
+                    </div>
                 </div>
             </div>
+            <div className="taskflexy"></div>
         </div>
     )
 }

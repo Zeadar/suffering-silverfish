@@ -14,7 +14,7 @@ ul {
 }
 
 .calendar {
-    width: 40rem;
+    width: 60rem;
     /* height: 30rem; */
     /* background: whitesmoke; */
 }
@@ -52,6 +52,11 @@ ul {
 
 .cell {
     border: 1px solid;
-    min-height: 3rem;
+    min-height: 7rem;
+    max-height: 7rem;
     padding: 0.5rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

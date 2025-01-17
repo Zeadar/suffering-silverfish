@@ -22,8 +22,9 @@
 }
 
 .frame {
-    min-width: 40rem;
     max-width: 60rem;
+    width: 100%;
+
     /* min-height: 20rem; */
     height: 80vh;
     border-radius: 2rem;

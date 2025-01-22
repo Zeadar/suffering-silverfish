@@ -151,7 +151,7 @@ function App() {
                 <div className="container">
                     <div className="frame">
                         <div className="flexy">{displayer()}</div>
-                        <div className="topper"/>
+                        <div className="topper" />
                         <Calendar tasks={tasks} />
                     </div>
                 </div>

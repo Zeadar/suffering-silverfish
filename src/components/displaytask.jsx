@@ -1,37 +1,10 @@
 import React from "react"
 import "./common.css"
 import "./displaytask.css"
-/* <button
-                    className="standardbutton"
-                    onClick={() => {
-                        const authority = window.localStorage.getItem("authority")
-
-                        if (!authority) {
-                            throw new Error("Not logged in")
-                        }
-
-                        fetch("/api/task", {
-                            method: "DELETE",
-                            headers: {
-                                Authority: authority,
-                            },
-                            body: JSON.stringify({
-                                id: id,
-                            }),
-                        })
-                            .then(() => {
-                                console.log("removed", id)
-                                handleDeleteTask()
-                            })
-                            .catch((err) => {
-                                console.error(err)
-                            })
-                    }}
-                >
-                    Delete
-                </button> */
+import { useState } from "react"
 
 const DisplayTask = ({ task, even, handleTaskUpdate }) => {
+    const [editMode, setEditmode] = useState(false)
     const colorClass = even ? "even" : "odd"
     const { id, title, description, due } = task
     const dueDisplay = due.toDateString()
@@ -69,9 +42,12 @@ const DisplayTask = ({ task, even, handleTaskUpdate }) => {
                 completed: new Date(Date()).toISOString().slice(0, 10),
             }),
         })
+        handleTaskUpdate()
     }
 
-    return (
+    return useState ? (
+        <div></div>
+    ) : (
         <div className={"taskrow " + colorClass}>
             <div className="taskflexy">
                 <div className="group leftgroup">
@@ -79,10 +55,15 @@ const DisplayTask = ({ task, even, handleTaskUpdate }) => {
                     <span className=""> {description}</span>
                 </div>
                 <div className="group rightgroup">
-                    <span className={`${dueClass} rightgroup righttext`}>{dueDisplay}</span>
+                    <span className={`${dueClass} rightgroup righttext`}>
+                        {dueDisplay}
+                    </span>
                     <div className="rightgroup rightbuttons">
                         <button className="standardbutton">edit</button>
-                        <button className="standardbutton" onClick={markComplete}>
+                        <button
+                            className="standardbutton"
+                            onClick={markComplete}
+                        >
                             Mark Complete
                         </button>
                     </div>

@@ -16,21 +16,28 @@ class Task {
         this.reccuringN = recurringN
         this.recurringStop = new Date(recurringStop)
         this.title = title
-        this.completeTasks = completeTasks
+        this.completeTasks = new Map(completeTasks.map((ct) => [ct.completed, true]))
+        // console.log({ completeTasks: this.completeTasks })
 
-        this.assignDate.setHours(0)
+        this.assignDate.setHours(12)
         this.assignDate.setMinutes(0)
         this.assignDate.setSeconds(0)
         this.assignDate.setMilliseconds(0)
 
-        this.recurringStop.setHours(0)
+        this.recurringStop.setHours(12)
         this.recurringStop.setMinutes(0)
         this.recurringStop.setSeconds(0)
         this.recurringStop.setMilliseconds(0)
     }
 
+    //Should give the next due date that is not completed
     get due() {
         return this.assignDate
+    }
+
+    isComplete(date = new Date()) {
+        const d = date.toISOString().slice(0, 10)
+        return this.completeTasks.get(d) ?? false
     }
 }
 

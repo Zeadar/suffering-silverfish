@@ -22,11 +22,7 @@ const TaskList = ({ tasks, handleNewTask, handleDeleteTask }) => {
                 .sort((a, b) => a.due.getTime() - b.due.getTime())
                 .map((t, i) => (
                     <div className="flexy">
-                        <DisplayTask
-                            task={t}
-                            even={i % 2 == 0}
-                            handleDeleteTask={handleDeleteTask}
-                        />
+                        <DisplayTask task={t} even={i % 2 == 0} handleTaskUpdate={handleDeleteTask} />
                     </div>
                 ))}
         </div>

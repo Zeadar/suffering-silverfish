@@ -3,9 +3,9 @@ import "./calendar.css"
 
 function Title(titles) {
     const spans = titles.map((t) => (
-        <span>
+        <span className={t.isComplete(t.due) ? "completed" : ""}>
             <br />
-            {t}
+            {t.title}
         </span>
     ))
 
@@ -13,7 +13,6 @@ function Title(titles) {
 }
 
 const Calendar = ({ tasks }) => {
-    console.log({ tasks })
     const today = new Date()
     const daysThisMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate()
     let firstWeekday = new Date(today.getFullYear(), today.getMonth(), 1).getDay()
@@ -22,9 +21,8 @@ const Calendar = ({ tasks }) => {
     }
     const taskMap = new Map()
     tasks.forEach((t) => {
-        const due = t.due
-        const sDue = `${due.getFullYear()}${due.getMonth()}${due.getDate()}`
-        taskMap.set(sDue, taskMap.get(sDue) ? taskMap.get(sDue).concat([t.title]) : [t.title])
+        const due = t.due.toISOString().slice(0, 8) + t.due.getDate()
+        taskMap.set(due, taskMap.get(due) ? taskMap.get(due).concat([t]) : [t])
     })
     const daysAmount = firstWeekday + daysThisMonth > 35 ? 42 : 35
 
@@ -43,7 +41,7 @@ const Calendar = ({ tasks }) => {
                     return <div className="cell unavailable"></div>
                 }
 
-                const searchDate = `${today.getFullYear()}${today.getMonth()}${displayDate}`
+                const searchDate = today.toISOString().slice(0, 8) + displayDate
                 const titlesThisDay = taskMap.get(searchDate) ?? []
 
                 if (displayDate == today.getDate()) {

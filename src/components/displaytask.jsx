@@ -1,16 +1,7 @@
 import React from "react"
-import { useState } from "react"
 import "./common.css"
 import "./displaytask.css"
-<<<<<<< HEAD
 import { useState } from "react"
-
-const DisplayTask = ({ task, even, handleTaskUpdate }) => {
-    const [editMode, setEditmode] = useState(false)
-    const colorClass = even ? "even" : "odd"
-    const { id, title, description, due } = task
-    const dueDisplay = due.toDateString()
-=======
 
 function deleteTask(id, handleDeleteTask) {
     const authority = window.localStorage.getItem("authority")
@@ -36,22 +27,6 @@ function deleteTask(id, handleDeleteTask) {
             console.error(err)
         })
 }
->>>>>>> c0cc25d (wip)
-
-async function markComplete(id) {
-    const authority = window.localStorage.getItem("authority")
-    const headers = new Headers()
-    headers.append("Authority", authority)
-
-    await fetch("/api/complete_task", {
-        method: "POST",
-        headers,
-        body: JSON.stringify({
-            task_id: id,
-            completed: new Date(Date()).toISOString().slice(0, 10),
-        }),
-    })
-}
 
 function NormalInterface({ id, title, description, due }, toggleModeHandler) {
     const today = new Date()
@@ -73,7 +48,6 @@ function NormalInterface({ id, title, description, due }, toggleModeHandler) {
         return "normaldue"
     })()
 
-<<<<<<< HEAD
     async function markComplete(evt) {
         const authority = window.localStorage.getItem("authority")
         const headers = new Headers()
@@ -92,29 +66,6 @@ function NormalInterface({ id, title, description, due }, toggleModeHandler) {
         handleTaskUpdate()
     }
 
-    return useState ? (
-        <div></div>
-    ) : (
-        <div className={"taskrow " + colorClass}>
-            <div className="taskflexy">
-                <div className="group leftgroup">
-                    <span className={`${dueClass} lefttitle`}>{title}</span>
-                    <span className=""> {description}</span>
-                </div>
-                <div className="group rightgroup">
-                    <span className={`${dueClass} rightgroup righttext`}>
-                        {dueDisplay}
-                    </span>
-                    <div className="rightgroup rightbuttons">
-                        <button className="standardbutton">edit</button>
-                        <button
-                            className="standardbutton"
-                            onClick={markComplete}
-                        >
-                            Mark Complete
-                        </button>
-                    </div>
-=======
     return (
         <div className="taskflexy">
             <div className="group leftgroup">
@@ -136,7 +87,6 @@ function NormalInterface({ id, title, description, due }, toggleModeHandler) {
                     >
                         Mark Complete
                     </button>
->>>>>>> c0cc25d (wip)
                 </div>
             </div>
         </div>

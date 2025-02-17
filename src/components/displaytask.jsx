@@ -48,12 +48,10 @@ function NormalInterface({ id, title, description, due }, toggleModeHandler) {
         return "normaldue"
     })()
 
-    async function markComplete(evt) {
+    async function markComplete(id) {
         const authority = window.localStorage.getItem("authority")
         const headers = new Headers()
         headers.append("Authority", authority)
-
-        evt.target.setAttribute("disabled", true)
 
         await fetch("/api/complete_task", {
             method: "POST",
@@ -105,6 +103,7 @@ function EditInterface(task, toggleModeHandler, deleteTaskHandler) {
                     className="standardbutton"
                     onClick={() => {
                         deleteTask(task.id, deleteTaskHandler)
+                        toggleModeHandler()
                     }}
                 >
                     Delete

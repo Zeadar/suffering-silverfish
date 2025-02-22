@@ -28,28 +28,8 @@ function deleteTask(id, handleDeleteTask) {
         })
 }
 
-function NormalInterface(task, toggleModeHandler, handleTaskUpdate) {
-    const { id, title, description, due } = task
-    const today = new Date()
-    today.setHours(0)
-    today.setMinutes(0)
-    today.setSeconds(0)
-    today.setMilliseconds(0)
-
-    const dueDisplay = due.toDateString()
-    const dueClass = (() => {
-        if (due < today) {
-            return "overdue"
-        }
-
-        if (due > today) {
-            return "underdue"
-        }
-
-        return "normaldue"
-    })()
-
-    async function markComplete(id, completeDate) {
+function MarkCompleteButton(id, completeDate, handleTaskUpdate) {
+    async function markComplete() {
         const authority = window.localStorage.getItem("authority")
         const headers = new Headers()
         headers.append("Authority", authority)
@@ -65,6 +45,70 @@ function NormalInterface(task, toggleModeHandler, handleTaskUpdate) {
     }
 
     return (
+        <button
+            className="standardbutton"
+            onClick={async () => {
+                await markComplete()
+                handleTaskUpdate()
+            }}
+        >
+            Mark as Done
+        </button>
+    )
+}
+
+function UnmarkCompleteButton(id, handleTaskUpdate) {
+    async function unMarkComplete() {
+        const authority = window.localStorage.getItem("authority")
+        const headers = new Headers()
+        headers.append("Authority", authority)
+
+        await fetch("/api/complete_task", {
+            method: "DELETE",
+            headers,
+            body: JSON.stringify({
+                id: id,
+            }),
+        })
+    }
+    return (
+        <button
+            className="standardbutton"
+            onClick={async () => {
+                await unMarkComplete()
+                handleTaskUpdate()
+            }}
+        >
+            Mark as Undone
+        </button>
+    )
+}
+
+function NormalInterface(task, toggleModeHandler, handleTaskUpdate) {
+    const { id, title, description, due } = task
+    const today = new Date()
+    today.setHours(0)
+    today.setMinutes(0)
+    today.setSeconds(0)
+    today.setMilliseconds(0)
+
+    const markCompleteButton = MarkCompleteButton(id, due, handleTaskUpdate)
+    const unmarkCompleteButton = UnmarkCompleteButton(task.completeId(due), handleTaskUpdate)
+
+    const dueDisplay = due.toDateString()
+    const dueClass = (() => {
+        if (due < today) {
+            return "overdue"
+        }
+
+        if (due > today) {
+            return "underdue"
+        }
+
+        return "normaldue"
+    })()
+
+    return (
         <div className="taskflexy">
             <div className="group leftgroup">
                 <span className={`${dueClass} lefttitle`}>{title}</span>
@@ -76,17 +120,7 @@ function NormalInterface(task, toggleModeHandler, handleTaskUpdate) {
                     <button className="standardbutton" onClick={toggleModeHandler}>
                         Edit
                     </button>
-                    <button
-                        disabled={task.isComplete(due)}
-                        className="standardbutton"
-                        onClick={async (evt) => {
-                            evt.target.setAttribute("disabled", true)
-                            await markComplete(id, due)
-                            handleTaskUpdate()
-                        }}
-                    >
-                        Mark Complete
-                    </button>
+                    {task.completeId(due) ? unmarkCompleteButton : markCompleteButton}
                 </div>
             </div>
         </div>

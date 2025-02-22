@@ -3,7 +3,7 @@ import "./calendar.css"
 
 function Title(titles) {
     const spans = titles.map((t) => (
-        <span className={t.isComplete(t.due) ? "completed" : ""}>
+        <span className={t.completeId(t.due) ? "completed" : ""}>
             <br />
             {t.title}
         </span>

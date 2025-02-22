@@ -16,8 +16,7 @@ class Task {
         this.reccuringN = recurringN
         this.recurringStop = new Date(recurringStop)
         this.title = title
-        this.completeTasks = new Map(completeTasks.map((ct) => [ct.completed, true]))
-        // console.log({ completeTasks: this.completeTasks })
+        this.completeTasks = new Map(completeTasks.map((ct) => [ct.completed, ct.id]))
 
         this.assignDate.setHours(12)
         this.assignDate.setMinutes(0)
@@ -35,9 +34,9 @@ class Task {
         return this.assignDate
     }
 
-    isComplete(date = new Date()) {
+    completeId(date = new Date()) {
         const d = date.toISOString().slice(0, 10)
-        return this.completeTasks.get(d) ?? false
+        return this.completeTasks.get(d)
     }
 }
 

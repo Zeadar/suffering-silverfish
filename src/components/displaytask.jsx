@@ -28,7 +28,8 @@ function deleteTask(id, handleDeleteTask) {
         })
 }
 
-function NormalInterface({ id, title, description, due }, toggleModeHandler, handleTaskUpdate) {
+function NormalInterface(task, toggleModeHandler, handleTaskUpdate) {
+    const { id, title, description, due } = task
     const today = new Date()
     today.setHours(0)
     today.setMinutes(0)
@@ -49,7 +50,6 @@ function NormalInterface({ id, title, description, due }, toggleModeHandler, han
     })()
 
     async function markComplete(id, completeDate) {
-        console.log({ completeDate })
         const authority = window.localStorage.getItem("authority")
         const headers = new Headers()
         headers.append("Authority", authority)
@@ -77,6 +77,7 @@ function NormalInterface({ id, title, description, due }, toggleModeHandler, han
                         Edit
                     </button>
                     <button
+                        disabled={task.isComplete(due)}
                         className="standardbutton"
                         onClick={async (evt) => {
                             evt.target.setAttribute("disabled", true)

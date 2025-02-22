@@ -48,7 +48,8 @@ function NormalInterface({ id, title, description, due }, toggleModeHandler, han
         return "normaldue"
     })()
 
-    async function markComplete(id) {
+    async function markComplete(id, completeDate) {
+        console.log({ completeDate })
         const authority = window.localStorage.getItem("authority")
         const headers = new Headers()
         headers.append("Authority", authority)
@@ -58,7 +59,7 @@ function NormalInterface({ id, title, description, due }, toggleModeHandler, han
             headers,
             body: JSON.stringify({
                 task_id: id,
-                completed: new Date(Date()).toISOString().slice(0, 10),
+                completed: completeDate.toISOString().slice(0, 10),
             }),
         })
     }
@@ -79,7 +80,7 @@ function NormalInterface({ id, title, description, due }, toggleModeHandler, han
                         className="standardbutton"
                         onClick={async (evt) => {
                             evt.target.setAttribute("disabled", true)
-                            await markComplete(id)
+                            await markComplete(id, due)
                             handleTaskUpdate()
                         }}
                     >
